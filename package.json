@@ -6,15 +6,26 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "toolpad-studio:dev": "toolpad-studio dev ./my-toolpad-app",
+    "toolpad-studio:build": "toolpad-studio build ./my-toolpad-app",
+    "toolpad-studio:start": "toolpad-studio start ./my-toolpad-app"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^6.1.0",
     "@mui/material": "^6.1.0",
+    "@mui/material-nextjs": "^6.1.1",
+    "@toolpad/studio": "^0.7.0",
+    "dayjs": "^1.11.13",
+    "embla-carousel": "^8.3.0",
+    "embla-carousel-react": "^8.3.0",
+    "material-mui-date-range-picker": "^5.0.1",
+    "material-ui-datetime-range-picker": "^1.0.0",
     "next": "14.2.10",
     "react": "^18",
+    "react-dates": "^21.8.0",
     "react-dom": "^18"
   }
 }

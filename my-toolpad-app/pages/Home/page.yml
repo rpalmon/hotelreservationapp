@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mui/mui-toolpad/v0.6.0/docs/schemas/v1/definitions.json#properties/Page
+
+apiVersion: v1
+kind: page
+spec:
+  alias:
+    - 0UUCZgq
+  title: Default page
+  display: shell
+  parameters:
+    - name: test
+      value: A
+    - name: A
+      value: AD
+  content:
+    - component: FilePicker
+      name: filePicker
+    - component: Text
+      name: text
