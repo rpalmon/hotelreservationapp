@@ -21,7 +21,6 @@
     "dayjs": "^1.11.13",
     "embla-carousel": "^8.3.0",
     "embla-carousel-react": "^8.3.0",
-    "material-ui-datetime-range-picker": "^1.0.0",
     "next": "14.2.10",
     "react": "^18",
     "react-dates": "^21.8.0",
