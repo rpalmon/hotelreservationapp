@@ -18,15 +18,31 @@ export const metadata = {
 };
 
 import ResponsiveAppBar from "./ResponsiveAppBar";
-
-export default function RootLayout({ children }) {
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs'
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {/* <ResponsiveAppBar      /> */}
-        
-        {children}
-      </body>
-    </html>
-  );
+    <ClerkProvider>
+      <html lang="en">
+        <body>
+          <SignedOut>
+            <SignInButton />
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
+  )
 }
