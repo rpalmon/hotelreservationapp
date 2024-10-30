@@ -9,6 +9,8 @@ import { SingleInputDateRangeField } from '@mui/x-date-pickers-pro/SingleInputDa
 import { LicenseInfo } from '@mui/x-data-grid-pro';
 
 LicenseInfo.setLicenseKey('e0d9bb8070ce0054c9d9ecb6e82cb58fTz0wLEU9MzI0NzIxNDQwMDAwMDAsUz1wcmVtaXVtLExNPXBlcnBldHVhbCxLVj0y')
+import { useUser } from '@clerk/nextjs'
+import { useAuth } from '@clerk/nextjs'
 
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
@@ -25,6 +27,8 @@ function convertToDate(dayjsObj) {
   return new Date(dayjsObj.$y, dayjsObj.$m, dayjsObj.$D);
 }
 import PersonIcon from '@mui/icons-material/Person';
+// import { currentUser } from '@clerk/nextjs/server'
+// const couchbase = require('couchbase')
 
 const CustomInputWithPopper = () => {
   const [open, setOpen] = useState(false); // Controls whether the Popper is open
@@ -122,6 +126,11 @@ export default function Page() {
     dayjs('2024-01-01'),
     dayjs('2024-01-10'),
   ]);
+  const { isSignedIn, user } = useUser()
+
+  // const  account = currentUser()
+
+  const { isLoaded, userId, sessionId, getToken } = useAuth()
 
   const [rooms, setRooms] = useState([{ roomNumber: 1, people: 0 }]);
 
@@ -142,6 +151,8 @@ export default function Page() {
       setRooms(rooms.slice(0, -1));
     }
   };
+
+  // console.log("account: ", account);
 
   return (
     <div>
@@ -232,15 +243,27 @@ export default function Page() {
         }}
       >
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          
+          <div
+          style={{
+            padding: '20px',
+            margin: '10px',
+            border: '1px solid',
+            borderRadius: '10px',
+            backgroundColor: 'lightblue',
+          }}
+          >
+
+         
           {rooms.map((room, index) => (
             <div
               key={index}
               style={{
-                padding: '20px',
-                margin: '10px',
-                border: '1px solid',
-                borderRadius: '10px',
-                backgroundColor: 'lightblue',
+                padding: '5px',
+                // margin: '10px',
+                // border: '1px solid',
+                // borderRadius: '10px',
+                // backgroundColor: 'lightblue',
               }}
             >
               {`Room ${room.roomNumber}`}
@@ -296,12 +319,14 @@ export default function Page() {
               </div>
             </div>
           ))}
+        </div> 
         </div>
       </div>
 
       <div style={{ marginTop: '20px', textAlign: 'center' }}>
         Selected range: {dateRange[0] && dateRange[1] ? `${dateRange[0].format('YYYY-MM-DD')} - ${dateRange[1].format('YYYY-MM-DD')}` : 'No date selected'}
       </div>
+      Hello, {user?.firstName} your current active session is {sessionId}
 
       <div>
         <pre
@@ -315,7 +340,8 @@ export default function Page() {
             margin: '20px 20px',
           }}
         >
-          {JSON.stringify({ 
+          {JSON.stringify({
+            "user": user? user.id : null,
             "check-in": dateRange[0] && dateRange[0].format('YYYY-MM-DD'), 
             "check-out": dateRange[1] && dateRange[1].format('YYYY-MM-DD'), 
             rooms 
